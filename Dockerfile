@@ -206,14 +206,21 @@ ENV WAHA_GOWS_SOCKET=/tmp/gows.sock
 COPY entrypoint.sh /entrypoint.sh
 
 # Chokidar options to monitor file changes
+# Chokidar options to monitor file changes
 ENV CHOKIDAR_USEPOLLING=1
 ENV CHOKIDAR_INTERVAL=5000
 
 # WAHA variables
 ENV WAHA_ZIPPER=ZIPUNZIP
 
-# Run command, etc
+# Disable authentication completely at runtime
+ENV DISABLE_AUTH=true
+ENV WAHA_DISABLE_AUTH=true
+ENV WHATSAPP_DISABLE_AUTH=true
+
 EXPOSE 3000
-# Use tini as init system to handle zombie processes properly
-ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["/entrypoint.sh", "--no-auth"]
+
+# Override entrypoint to skip credential generation
+ENTRYPOINT []
+CMD ["node", "dist/main.js", "--no-auth"]
+
