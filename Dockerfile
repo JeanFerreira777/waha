@@ -220,7 +220,7 @@ ENV WHATSAPP_DISABLE_AUTH=true
 
 EXPOSE 3000
 
-# Override entrypoint to skip credential generation
-ENTRYPOINT []
-CMD ["node", "dist/main.js", "--no-auth"]
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["/entrypoint.sh"]
+
 
