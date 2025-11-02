@@ -216,4 +216,4 @@ ENV WAHA_ZIPPER=ZIPUNZIP
 EXPOSE 3000
 # Use tini as init system to handle zombie processes properly
 ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["/entrypoint.sh"]
+CMD ["/entrypoint.sh", "--no-auth"]
