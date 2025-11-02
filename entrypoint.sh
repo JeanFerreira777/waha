@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# === Force disable auth ===
+export WAHA_DISABLE_AUTH=true
+export DISABLE_AUTH=true
+export WHATSAPP_DISABLE_AUTH=true
+
+# Bypass credential generation
+sed -i '/Generated credentials/,/Generated credentials ready to copy/d' /app/dist/main.js 2>/dev/null || true
+echo ">>> Auth disabled manually by override <<<"
+
 
 #
 # Calculate UV_THREADPOOL_SIZE based on number of CPUs
